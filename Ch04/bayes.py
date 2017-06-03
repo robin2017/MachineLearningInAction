@@ -30,11 +30,21 @@ def setOfWords2Vec(vocabList, inputSet):
     return returnVec
 
 def trainNB0(trainMatrix,trainCategory):
-    numTrainDocs = len(trainMatrix)
-    numWords = len(trainMatrix[0])
-    pAbusive = sum(trainCategory)/float(numTrainDocs)
+    print "trainmatrix"
+    print trainMatrix
+    print "traincategery"
+    print trainCategory
+
+    numTrainDocs = len(trainMatrix)  #6
+    print numTrainDocs
+    numWords = len(trainMatrix[0]) #32
+    print numWords
+    pAbusive = sum(trainCategory)/float(numTrainDocs) #3/6=0.5
+    print pAbusive
+    #32X1
     p0Num = ones(numWords); p1Num = ones(numWords)      #change to ones() 
     p0Denom = 2.0; p1Denom = 2.0                        #change to 2.0
+    print p0Num
     for i in range(numTrainDocs):
         if trainCategory[i] == 1:
             p1Num += trainMatrix[i]
@@ -42,6 +52,15 @@ def trainNB0(trainMatrix,trainCategory):
         else:
             p0Num += trainMatrix[i]
             p0Denom += sum(trainMatrix[i])
+    print "P1NUM"
+    print p1Num
+    print "P1DEMOM"
+    print p1Denom
+
+    print "P0NUM"
+    print p0Num
+    print "P0DEMOM"
+    print p0Denom
     p1Vect = log(p1Num/p1Denom)          #change to log()
     p0Vect = log(p0Num/p0Denom)          #change to log()
     return p0Vect,p1Vect,pAbusive

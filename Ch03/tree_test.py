@@ -4,8 +4,12 @@ __author__ = 'robin'
 
 import trees
 mydat,labels=trees.createDataSet()
-print mydat
+# print mydat
+#
+# print labels
+#
+# print trees.calcShannonEnt(mydat)
+#
+# print trees.chooseBestFeatureToSplit(mydat)
 
-print labels
-
-print trees.calcShannonEnt(mydat)
+print trees.createTree(mydat,labels)

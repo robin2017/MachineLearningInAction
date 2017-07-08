@@ -1,5 +1,8 @@
-#!/usr/bin/python
-#-*-coding:utf-8-*-
+'''
+Created on Nov 4, 2010
+Chapter 5 source file for Machine Learing in Action
+@author: Peter
+'''
 from numpy import *
 from time import sleep
 
@@ -18,33 +21,23 @@ def selectJrand(i,m):
         j = int(random.uniform(0,m))
     return j
 
-#裁剪函数，选取的值在最大值和最小值之间
 def clipAlpha(aj,H,L):
     if aj > H: 
         aj = H
     if L > aj:
         aj = L
     return aj
-#参数意义：数据集，标签集，常数c，容错率，外层循环次数
+
 def smoSimple(dataMatIn, classLabels, C, toler, maxIter):
     dataMatrix = mat(dataMatIn); labelMat = mat(classLabels).transpose()
-    #常数b和向量alpha为需要求解的目标，都初始化为0
     b = 0; m,n = shape(dataMatrix)
     alphas = mat(zeros((m,1)))
     iter = 0
     while (iter < maxIter):
-        #记录alpha是否已经进行优化
         alphaPairsChanged = 0
-        #m=100
         for i in range(m):
-            #fxi为预测的类别，是一个数
-            #alpha和labelmat都是长度100的列向量，点乘后再转置变成长度100的行向量，
-            #datamatix为100x2，datamatix.T为2x1，所以矩阵相乘结果为100x1，
-            #最后就是一个行向量与一个列向量进行矩阵相乘得到一个数，再加b
             fXi = float(multiply(alphas,labelMat).T*(dataMatrix*dataMatrix[i,:].T)) + b
-            #预测类别和真实类别之差为误差。
             Ei = fXi - float(labelMat[i])#if checks if an example violates KKT conditions
-            #正负间隔都要进行测试
             if ((labelMat[i]*Ei < -toler) and (alphas[i] < C)) or ((labelMat[i]*Ei > toler) and (alphas[i] > 0)):
                 j = selectJrand(i,m)
                 fXj = float(multiply(alphas,labelMat).T*(dataMatrix*dataMatrix[j,:].T)) + b

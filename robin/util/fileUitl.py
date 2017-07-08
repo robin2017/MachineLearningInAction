@@ -8,13 +8,13 @@ def file2matrix(filename,attrNum):
     fr = open(filename)
     numberOfLines = len(fr.readlines())         #get the number of lines in the file
     dataSet = zeros((numberOfLines,attrNum))        #prepare matrix to return
-    labels = []                       #prepare labels return
+    labelSpace = []                       #prepare labels return
     fr = open(filename)
     index = 0
     for line in fr.readlines():
         line = line.strip()
         listFromLine = line.split('\t')
         dataSet[index,:] = listFromLine[0:attrNum]
-        labels.append(int(listFromLine[-1]))
+        labelSpace.append(float(listFromLine[-1]))
         index += 1
-    return dataSet,labels
+    return dataSet,labelSpace

@@ -27,6 +27,19 @@ def loadExData2():
            [0, 0, 0, 2, 0, 2, 5, 0, 0, 1, 2],
            [0, 0, 0, 0, 5, 0, 0, 0, 0, 4, 0],
            [1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0]]
+
+def loadExData3():
+    return[[2, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+           [0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0],
+           [3, 3, 4, 0, 3, 0, 0, 2, 2, 0, 0],
+           [5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0],
+           [4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 5],
+           [0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+           [0, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0],
+           [0, 0, 0, 3, 0, 0, 0, 0, 4, 5, 0],
+           [1, 1, 2, 1, 1, 2, 1, 0, 4, 5, 0]]
     
 def ecludSim(inA,inB):
     return 1.0/(1.0 + la.norm(inA - inB))
@@ -88,6 +101,8 @@ def printMat(inMat, thresh=0.8):
         for k in range(32):
             if float(inMat[i,k]) > thresh:
                 print 1,
+            elif float(inMat[i,k]) < -0.5:
+                print 7,
             else: print 0,
         print ''
 
@@ -108,3 +123,5 @@ def imgCompress(numSV=3, thresh=0.8):
     reconMat = U[:,:numSV]*SigRecon*VT[:numSV,:]
     print "****reconstructed matrix using %d singular values******" % numSV
     printMat(reconMat, thresh)
+    print "****comp******"
+    printMat(myMat-reconMat)

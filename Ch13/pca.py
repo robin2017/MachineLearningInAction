@@ -1,3 +1,5 @@
+#!/usr/bin/python
+#-*-coding:utf-8-*-
 '''
 Created on Jun 1, 2011
 
@@ -11,6 +13,7 @@ def loadDataSet(fileName, delim='\t'):
     datArr = [map(float,line) for line in stringArr]
     return mat(datArr)
 
+#返回的是降维后的数据和降维前的数据
 def pca(dataMat, topNfeat=9999999):
     meanVals = mean(dataMat, axis=0)
     meanRemoved = dataMat - meanVals #remove mean
